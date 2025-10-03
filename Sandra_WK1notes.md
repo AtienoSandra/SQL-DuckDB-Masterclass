@@ -15,10 +15,9 @@ DuckDB supports standard SQL data types and even more complex structures. We loo
 
 ## CRUD Operations (Create, Read, Update, Delete)
 DuckDB uses standard SQL syntax for CRUD operations. 
-i) Create - INSERT: adds new records to a table.
-ii) Read - SELECT: retrieves data, supports filters, aggregations, ordering. 
-iii) Update - UPDATE: modifies existing rows. In DuckDB it is important to include WHERE because without it all rows will be updated.
+- Create - INSERT: adds new records to a table.
+- Read - SELECT: retrieves data, supports filters, aggregations, ordering.
+- Update - UPDATE: modifies existing rows. In DuckDB it is important to include WHERE because without it all rows will be updated.
                 It is important to run SELECT before UPDATE to preview the effect on your dataset. (UPDATE trips set fare_amount = 50 
                 WHERE trip_id = 2025;)
-iv) Delete - DELETE: removes rows from dataset. Must also specify WHERE to avoid data loss (DELETE FROM trips WHERE
-trip_id = 1001;_
+- Delete - DELETE: removes rows from dataset. Must also specify WHERE to avoid data loss (DELETE FROM trips WHERE trip_id = 1001;)

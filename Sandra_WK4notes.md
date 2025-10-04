@@ -35,20 +35,20 @@ that you can reference later in the same query. A "query within a query," but cl
           SELECT customer_id, SUM(amount) AS total_spent
           FROM sales
           GROUP BY customer_id
-      )
+            )
       SELECT customer_id, total_spent
       FROM sales_summary
       WHERE total_spent > 1000;
 
 #### Example (subquery):
 
-SELECT customer_id, total_spent
-FROM (
+      SELECT customer_id, total_spent
+      FROM (
     SELECT customer_id, SUM(amount) AS total_spent
     FROM sales
     GROUP BY customer_id
-) AS sales_summary
-WHERE total_spent > 1000;
+      ) AS sales_summary
+      WHERE total_spent > 1000;
 
 
 ## WINDOW FUNCTIONS
@@ -59,6 +59,7 @@ identities other than having to loose some because of aggregate functions or GRO
 ### Categories of Window Functions
 
 **1. Ranking window functions.**
+
 Are utilized in creating a numerical sequence for the rows within a table. Suitable for solving prioritization problems or comparing
 values based on their position in relation to others in your result set.
 - ROW_NUMBER() – Creates an Index by assigning UNIQUE sequential numbers to all the rows in a table.
@@ -77,17 +78,20 @@ values based on their position in relation to others in your result set.
 The ORDER BY clause inside a window function determines the sort order of the window i.e the rows with which the window function is acting on.
 
 **2. Aggregate window functions (used with OVER).** 
+
 Aggregate functions like SUM(), AVG(), COUNT(), MAX(), and MIN() normally collapse rows into a single result when used with GROUP BY.
 Window functions let you apply those aggregates without collapsing rows — instead, they return the aggregate value alongside each row, based on a defined "window.
 Aggregate window functions keep rows but add aggregate values as new columns.
 
 **Common Aggregate Window Functions**
+
 - SUM(...) OVER (...) - running totals, group totals without collapsing.
 - AVG(...) OVER (...) - moving averages, group averages.
 - COUNT(...) OVER (...) - counts per partition, counts per rolling frame.
 - MIN(...) / MAX(...) OVER (...) - rolling min/max, group-level bounds.
 
   **Variants of OVER()**
+  
 - PARTITION BY - defines groups (like GROUP BY).
 - ORDER BY - orders rows within each partition (for running totals, ranks, etc.).
 - ROWS BETWEEN - defines sliding windows (moving averages, rolling sums).

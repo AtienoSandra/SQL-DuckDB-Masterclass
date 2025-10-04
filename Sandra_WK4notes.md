@@ -31,14 +31,14 @@ that you can reference later in the same query. A "query within a query," but cl
 
 #### Example (CTE):
 
-WITH sales_summary AS (
-    SELECT customer_id, SUM(amount) AS total_spent
-    FROM sales
-    GROUP BY customer_id
-)
-SELECT customer_id, total_spent
-FROM sales_summary
-WHERE total_spent > 1000;
+      WITH sales_summary AS (
+          SELECT customer_id, SUM(amount) AS total_spent
+          FROM sales
+          GROUP BY customer_id
+      )
+      SELECT customer_id, total_spent
+      FROM sales_summary
+      WHERE total_spent > 1000;
 
 #### Example (subquery):
 

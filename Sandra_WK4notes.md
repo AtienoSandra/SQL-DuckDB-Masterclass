@@ -24,8 +24,7 @@ that you can reference later in the same query. A "query within a query," but cl
 | **CTE** | **Subquery**|
 | ----------------------: | ---------------------: |
 |  Declared at the start with WITH:                               |  Defined inline (inside SELECT, FROM WHERE)
-|  Named - You can reference them multiple times in the 
-      main query.                                                 |  Usually anonymous and can't be reused easily
+|  Named - You can reference them multiple times in the main query|  Usually anonymous and can't be reused easily
 |  Readable - Breaks a big query into smaller steps.              |  Shorter and good for simpler conditions
 |  Recursive - Can call themselves to handle hierarchies.         |  No recursion support
 |  Exist only for the query execution (not stored in the DB).     |

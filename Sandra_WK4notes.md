@@ -105,5 +105,41 @@ Aggregate window functions keep rows but add aggregate values as new columns.
 - NTH_VALUE Returns the value in nth position of the result set.
 
 **4. FRAMES**
-Frames create a subset within windows to control the rows over which the query engine will operate. Think of the FRAME clause as drawing a 
-window around your row to say: only use these specific rows near me for the calculation.
+
+Frames create a subset within windows to control the rows over which the query engine will operate. Think of the FRAME clause as drawing a window around your row to say: only use these specific rows near me for the calculation. 
+
+##### Syntax
+
+      SELECT column_name1,
+             WINDOW_FUNCTION (column_name2)
+             OVER ([PARTITION BY column_name1][ORDER BY column_name3][FRAME CLAUSE])
+             AS new_column
+      FROM table_name;
+
+**Boundary Specifiers**
+These define the start and end of the frame relative to the current row.
+
+- Unbounded preceding
+  Includes all rows from the beginning of the partition i.e. from the beginning upto the current row.
+- n preceding
+  Start n rows/values before the current row.
+- current row
+  Start (or end) exactly at the current row. This is the specific row SQL is working on right now while it applies the window            function.
+- n following
+  end n rows/values after the current row.
+- Unbounded following
+  Go all the way to the last row of the partition.
+Default frame is unbounded preceding to current row.
+ROWS vs. RANGE:
+ROWS: Defines the frame based on a fixed number of rows, regardless of their values.
+RANGE: Defines the frame based on a range of values in the ordering column, including all "peer" rows (rows with the same value in the ORDER BY column) within that range.
+
+#### Example Frame Query
+     
+      SELECT 
+            order_id,
+            amount,
+            AVG(amount) OVER ( ORDER BY order_id
+        ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
+          ) AS moving_avg
+      FROM sales;

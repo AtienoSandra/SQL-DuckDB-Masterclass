@@ -23,7 +23,7 @@ that you can reference later in the same query. A "query within a query," but cl
 
 | **CTE** | **Subquery**|
 | ----------------------: | ---------------------: |
-| - Declared at the start with WITH                                  | - Defined inline (inside SELECT, FROM WHERE)
+| --- Declared at the start with WITH:                               | - Defined inline (inside SELECT, FROM WHERE)
 | - Named - You can reference them multiple times in the main query. | - Usually anonymous and can't be reused easily
 | - Readable - Breaks a big query into smaller steps.                | - Shorter and good for simpler conditions
 | - Recursive - Can call themselves to handle hierarchies.           | - No recursion support
@@ -57,20 +57,23 @@ Unlike aggregate functions, window functions don't need grouping rows of data in
 identities other than having to loose some because of aggregate functions or GROUP BY.
 
 ### Categories of Window Functions
+
 **1. Ranking window functions.**
 Are utilized in creating a numerical sequence for the rows within a table. Suitable for solving prioritization problems or comparing
 values based on their position in relation to others in your result set.
-    - ROW_NUMBER() – Creates an Index by assigning UNIQUE sequential numbers to all the rows in a table.
+- ROW_NUMBER() – Creates an Index by assigning UNIQUE sequential numbers to all the rows in a table.
                        ROW_NUMBER() OVER ( ORDER BY).
-    - RANK() – Assigns a rank to rows in table. Rows with the same rank are assigned identical values, but the next rank number will be
+                       
+- RANK() – Assigns a rank to rows in table. Rows with the same rank are assigned identical values, but the next rank number will be
                skipped. For example, 1,1,3,4,4,4,4,8. RANK() OVER ( ORDER BY).
-    - DENSE_RANK() - Assigns a rank to rows in table. Rows with the same rank are assigned identical values, but the next rank number 
+  
+- DENSE_RANK() - Assigns a rank to rows in table. Rows with the same rank are assigned identical values, but the next rank number 
                      WILL NOT be skipped. For example, 1,1,2,3,4,5,5,5,6. DENSE_RANK OVER ( ORDER BY).
-    - PERCENT_RANK() – Assigns percentile rank between 0 and 1 in descending order i.e the lowest rank is 0 and thehigher rank is 1. Ranks 
-                       in between are calculated based on the relative position of your value in the result set. Ranks can be duplicated and the subsequent rank will be skipped.
-                      PERCENT_RANK() OVER ( ORDER BY).
-    - NTILE() – Creates ranked partitions by which we spilt the result set. For example NTILE(3) OVER(ORDER BY some_column DESC) will assign each row a rank 
-                between 1-3. NTILE(x) OVER ( ORDER BY)
+  
+- PERCENT_RANK() – Assigns percentile rank between 0 and 1 in descending order i.e the lowest rank is 0 and thehigher rank is 1. Ranks in between are calculated based on the relative position of your value in the result set. Ranks can be duplicated and the subsequent rank will be skipped.PERCENT_RANK() OVER ( ORDER BY).
+  
+- NTILE() – Creates ranked partitions by which we spilt the result set. For example NTILE(3) OVER(ORDER BY some_column DESC) will assign each row a rank between 1-3. NTILE(x) OVER ( ORDER BY).
+  
 The ORDER BY clause inside a window function determines the sort order of the window i.e the rows with which the window function is acting on.
 
 **2. Aggregate window functions (used with OVER).** 
@@ -78,13 +81,13 @@ Aggregate functions like SUM(), AVG(), COUNT(), MAX(), and MIN() normally collap
 Window functions let you apply those aggregates without collapsing rows — instead, they return the aggregate value alongside each row, based on a defined "window.
 Aggregate window functions keep rows but add aggregate values as new columns.
 
-     **Common Aggregate Window Functions**
+**Common Aggregate Window Functions**
 - SUM(...) OVER (...) - running totals, group totals without collapsing.
 - AVG(...) OVER (...) - moving averages, group averages.
 - COUNT(...) OVER (...) - counts per partition, counts per rolling frame.
 - MIN(...) / MAX(...) OVER (...) - rolling min/max, group-level bounds.
 
-       **Variants of OVER()**
+  **Variants of OVER()**
 - PARTITION BY - defines groups (like GROUP BY).
 - ORDER BY - orders rows within each partition (for running totals, ranks, etc.).
 - ROWS BETWEEN - defines sliding windows (moving averages, rolling sums).

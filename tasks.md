@@ -191,7 +191,9 @@ sql_project/
 │   ├─ financial_final.sql
 │
 ├─ pipeline/
+│   ├─ pipeline.py
 │   ├─ pipeline2.py
+│   ├─ requirements.txt
 │
 ├─ README.md
 └─ LICENSE

@@ -185,8 +185,8 @@ You’re free to use, modify, and share it for educational and analytical purpos
 sql_project/
 │
 ├─ SQL-queries-in-DuckDB/
-│   ├─ validation2.sql
-│   ├─ cleaning2.sql
+│   ├─ validation_final.sql
+│   ├─ cleaning_final.sql
 │   ├─ operational_final.sql
 │   ├─ financial_final.sql
 │
